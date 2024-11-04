@@ -72,11 +72,13 @@ Outras telas exigem que o usuário esteja logado.
 2. Restaure os pacotes NuGet
    ```bash
    dotnet restore 
-4. Atualize a string de conexão No arquivo appsettings.json, atualize a string de conexão para o seu banco de dados:
+3. Atualize a string de conexão No arquivo appsettings.json, atualize a string de conexão para o seu banco de dados:
+   ```bash
    "ConnectionStrings": { "DefaultConnection": "Server=<SEU_SERVIDOR>;Database=<NOME_DO_BANCO>;User Id=<SEU_USUARIO>;Password=<SUA_SENHA>;"}
-5. Execute as Migrations Para criar o banco de dados e as tabelas, execute:
+4. Execute as Migrations Para criar o banco de dados e as tabelas, execute:
+   ```bash
    dotnet ef database update
-7. Inicie a aplicação
+5. Inicie a aplicação
 
 ## Acesso à Aplicação
 ### Acesse a aplicação em seu navegador através do seguinte URL:
