@@ -3,47 +3,43 @@
 ## Descrição do Projeto
 Este projeto é uma aplicação web desenvolvida em ASP.NET Core com Entity Framework Code First, destinada ao gerenciamento de ativos de TI em uma empresa. A aplicação permite que os usuários cadastrem-se, façam login utilizando suas credenciais ou através de autenticação social com Facebook e Google. Os usuários podem registrar ativos, visualizar dashboards e gerenciar informações relacionadas a equipamentos de tecnologia.
 
+### Link para o projeto:
+https://drive.google.com/file/d/18UiI2jOT6_WnHTGk8spS1DhKN071h75g/view?usp=drive_link
+
 ## Entidades
 A aplicação possui as seguintes entidades, cada uma com seus respectivos relacionamentos:
 
 ### Ativo
-- **Propriedades**: Id, Nome, Descrição, Fabricante, Modelo, Número de Série, Data de Aquisição, Valor, Localização, Status, ResponsávelId, DepartamentoId, FornecedorId.
 - **Relacionamentos**:
   - Muitos-para-um com Departamento
   - Muitos-para-um com Fornecedor
   - Muitos-para-um com Funcionario
 
 ### Departamento
-- **Propriedades**: Id, Nome, Descrição.
 - **Relacionamentos**:
   - Um para muitos com Funcionario
   - Um para muitos com Ativo
 
 ### Funcionario
-- **Propriedades**: Id, Nome, Cargo, DepartamentoId, Email, Senha.
 - **Relacionamentos**:
   - Muitos-para-um com Departamento
   - Um para muitos com Ativo
 
 ### Fornecedor
-- **Propriedades**: Id, Nome, Contato, Endereço.
 - **Relacionamentos**:
   - Um para muitos com Ativo
   - Um para muitos com Garantia
 
 ### Garantia
-- **Propriedades**: Id, DataInicio, DataFim, FornecedorId, AtivoId.
 - **Relacionamentos**:
   - Um para um com Ativo
   - Muitos-para-um com Fornecedor
 
 ### Licenca
-- **Propriedades**: Id, Nome, Tipo, NumeroSerie, DataAquisicao, DataExpiracao, Software, AtivoId.
 - **Relacionamentos**:
   - Muitos-para-um com Ativo
 
 ### Manutencao
-- **Propriedades**: Id, Data, Descrição, Custo, AtivoId.
 - **Relacionamentos**:
   - Muitos-para-um com Ativo
 
