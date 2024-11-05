@@ -1,0 +1,67 @@
+﻿@model Device_Hub.Models.Licenca
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3 card shadow mb-4 border-bottom-info">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <h1 class="h3 mb-2 text-gray-800">Detalhes da Licença</h1>
+        </div>
+        <div class="row g-3 justify-content-between">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+                    <dd>@Html.DisplayFor(model => model.Nome)</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.Tipo)</dt>
+                    <dd>@Html.DisplayFor(model => model.Tipo)</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.NumeroSerie)</dt>
+                    <dd>@Html.DisplayFor(model => model.NumeroSerie)</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.DataAquisicao)</dt>
+                    <dd>@Html.DisplayFor(model => model.DataAquisicao)</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.DataExpiracao)</dt>
+                    <dd>@Html.DisplayFor(model => model.DataExpiracao)</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.Software)</dt>
+                    <dd>@Html.DisplayFor(model => model.Software)</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.AtivoId)</dt>
+                    <dd>@Html.DisplayFor(model => model.AtivoId)</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="form-group text-right mt-5">
+            <div class="row">
+                <div class="

@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Device_Hub.Models.Departamento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h1 class="h3 mb-2 text-gray-800">Departamentos</h1>
+        <div class="d-flex justify-content-end">
+            @Html.ActionLink("Adicionar", "Create", null, new { @class = "btn btn-primary mr-3" })
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Descricao)
+                        </th>
+                        <th>
+                            Opções
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-circle" title="Editar">
+                                    <i class="fas fa-pen text-white"></i>
+                                </a>
+                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-circle" title="Detalhes">
+                                    <i class="fas fa-info-circle text-white"></i>
+                                </a>
+                                <a href="#" class="btn btn-danger btn-circle" title="Deletar" data-toggle="modal" data-target="#deleteModal" data-id="@item.Id">
+                                    <i class="fas fa-trash text-white"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Tem certeza de que deseja excluir este departamento?
+                        </div>
+                        <div class="modal-footer">
+                            <form id="deleteForm" method="post" action="">
+                                @Html.AntiForgeryToken()
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Excluir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Configura o formulário do modal com a URL correta de exclusão
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Botão que acionou o modal
+            var id = button.data('id'); // Extrai o ID do data-* atributo
+            var form = $(this).find('#deleteForm');
+            form.attr('action', '/Departamentos/Delete/' + id); // Configura a URL do action
+
+            // Verificar se o departamento tem vínculos
+            $.ajax({
+                url: '/Departamentos/VerificarVinculos/' + id,
+                type: 'GET',
+                success: function (response) {
+                    console.log(response); // Adicione este log para verificar a resposta
+                    if (!response.sucesso) {
+                        // Exibir mensagem de erro e ocultar o botão de exclusão
+                        $('#deleteModal .modal-body').text(response.mensagem);
+                        $('#deleteModal #confirmDeleteButton').hide(); // Ocultar o botão de exclusão
+                    } else {
+                        // Restaurar o estado original do modal
+                        $('#deleteModal .modal-body').text('Tem certeza de que deseja excluir este departamento?');
+                        $('#deleteModal #confirmDeleteButton').show(); // Exibir o botão de exclusão
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Erro:", error); // Adicione este log para verificar o erro
+                    $('#deleteModal .modal-body').text('Ocorreu um erro ao verificar os vínculos.');
+                    $('#deleteModal #confirmDeleteButton').hide(); // Ocultar o botão de exclusão
+                }
+
+            });
+            // Verificar se o departamento tem vínculos
+            $.ajax({
+                url: '/Departamentos/VerificarVinculos/' + id,
+                type: 'GET',
+                success: function (response) {
+                    console.log(response); // Adicione este log para verificar a resposta
+                    if (!response.sucesso) {
+                        // Exibir mensagem de erro e ocultar o botão de exclusão
+                        $('#deleteModal .modal-body').text(response.mensagem);
+                        $('#deleteModal #confirmDeleteButton').hide(); // Ocultar o botão de exclusão
+                    } else {
+                        // Restaurar o estado original do modal
+                        $('#deleteModal .modal-body').text('Tem certeza de que deseja excluir este departamento?');
+                        $('#deleteModal #confirmDeleteButton').show(); // Exibir o botão de exclusão
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Erro:", error); // Adicione este log para verificar o erro
+                    $('#deleteModal .modal-body').text('Ocorreu um erro ao verificar os vínculos.');
+                    $('#deleteModal #confirmDeleteButton').hide(); // Ocultar o botão de exclusão
+                }
+
+            });
+        });
+    });
+</script>
+
+
+

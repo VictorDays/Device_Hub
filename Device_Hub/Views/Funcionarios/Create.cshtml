@@ -1,0 +1,67 @@
+﻿@model Device_Hub.Models.Funcionario
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3 card shadow mb-4 border-bottom-success">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <h1 class="h3 mb-2 text-gray-800">Adicionar Funcionário</h1>
+        </div>
+        <div class="row g-3 justify-content-center">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", id = "nomeFuncionario", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Cargo, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Cargo, new { htmlAttributes = new { @class = "form-control", id = "cargoFuncionario", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Cargo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.DepartamentoId, "Departamento", htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownList("DepartamentoId", null, htmlAttributes: new { @class = "form-control", id = "departamentoFuncionario", required = "required" })
+                @Html.ValidationMessageFor(model => model.DepartamentoId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "emailFuncionario", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control", id = "senhaFuncionario", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+
+        </div>
+        <div class="form-group text-right mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn-icon-split">
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-secondary", style = "padding: 6px 20px; font-size: 1rem;" })
+                    </a>
+                    <a class="btn-icon-split btn-lg mr-5 ml-3">
+                        <input class="btn btn-success" type="submit" value="Adicionar" style="padding: 8px 16px; font-size: 1.05rem;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

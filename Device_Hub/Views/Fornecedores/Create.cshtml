@@ -1,0 +1,56 @@
+﻿@model Device_Hub.Models.Fornecedor
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="row g-3 card shadow mb-4 border-bottom-success">
+    <div class="card-header py-3 d-flex justify-content-between">
+        <h1 class="h3 mb-2 text-gray-800">Adicionar Fornecedor</h1>
+    </div>
+    <div class="row g-3 justify-content-center">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", id = "nomeFornecedor", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Contato, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Contato, new { htmlAttributes = new { @class = "form-control", id = "contatoFornecedor", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Contato, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control", id = "enderecoFornecedor", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group text-right mt-5">
+        <div class="row ">
+            <div class="col-md-12">
+                <a class="btn-icon-split">
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-secondary", style = "padding: 6px 20px; font-size: 1rem;" })
+                </a>
+                <a class="btn-icon-split btn-lg mr-5 ml-3">
+                    <input class="btn btn-success" type="submit" value="Adicionar" style="padding: 8px 16px; font-size: 1.05rem;"/>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

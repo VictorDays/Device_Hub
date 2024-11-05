@@ -1,0 +1,101 @@
+﻿@using Device_Hub.Models
+@model LoginViewModel
+@{
+    Layout = null; // Remove o layout
+    ViewBag.Title = "Logon";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this page -->
+    <link href="/Content/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-light">
+
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-xl-8 col-lg-10 col-md-7">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <img src="~/Content/img/electronics.jpg" class="img-fluid" />
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h3 text-gray-900 mb-4">DeviceHub | Login</h1>
+                                    </div>
+                                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+
+                                        @Html.AntiForgeryToken()
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @type = "email", @class = "form-control form-control-user" })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Senha", @type = "Password", @class = "form-control form-control-user" })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <br />
+                                        <input type="submit" value="Login" class="btn btn-success btn-user btn-block" />
+
+                                        <hr>
+
+                                        <div class="d-flex justify-content-center">
+                                            <section id="socialLoginForm">
+                                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                                            </section>
+                                        </div>
+                                    }
+                                    <hr>
+                                    <div class="text-center">
+                                        @Html.ActionLink("Registre-se", "Register", new { @class = "small " })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Scripts/sb-admin-2.min.js"></script>
+</body>
+</html>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

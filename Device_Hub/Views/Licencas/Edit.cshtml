@@ -1,0 +1,95 @@
+﻿@model Device_Hub.Models.Licenca
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3 card shadow mb-4 border-bottom-warning">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <h1 class="h3 mb-2 text-gray-800">Editar Licença</h1>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+    <div class="row g-3 justify-content-center">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.NumeroSerie, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.NumeroSerie, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NumeroSerie, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.DataAquisicao, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.DataAquisicao, new { @class = "form-control", id = "dataAquisicaoLicenca", required = "required", type = "date", onblur = "validarDataAquisicao()" })
+            @Html.ValidationMessageFor(model => model.DataAquisicao, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.DataExpiracao, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.DataExpiracao, new { htmlAttributes = new { @class = "form-control", id = "dataExpiracaoLicenca", required = "required", type = "date", onblur = "validarDataExpiracao()" } })
+            @Html.ValidationMessageFor(model => model.DataExpiracao, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Software, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.Software, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Software, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.AtivoId, "Ativo", htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownList("AtivoId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AtivoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        <div class="form-group text-right mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn-icon-split">
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-secondary", style = "padding: 6px 20px; font-size: 1rem;" })
+                    </a>
+                    <a class="btn-icon-split btn-lg mr-5 ml-3">
+                        <input class="btn btn-warning" type="submit" value="Salvar Alteração" style="padding: 8px 16px; font-size: 1.05rem;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function validarDataAquisicao() {
+        const dataAquisicao = document.getElementById('dataAquisicaoLicenca').value;
+        const hoje = new Date().toISOString().split('T')[0];
+
+        if (dataAquisicao > hoje) {
+            alert('A data de aquisição não pode estar no futuro.');
+        }
+    }
+
+    function validarDataExpiracao() {
+        const dataAquisicao = document.getElementById('dataAquisicaoLicenca').value;
+        const dataExpiracao = document.getElementById('dataExpiracaoLicenca').value;
+
+        if (dataExpiracao < dataAquisicao) {
+            alert('A data de expiração não pode ser anterior à data de aquisição.');
+        }
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
