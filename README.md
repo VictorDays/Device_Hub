@@ -4,7 +4,8 @@
 Este projeto é uma aplicação web desenvolvida em ASP.NET Core com Entity Framework Code First, destinada ao gerenciamento de ativos de TI em uma empresa. A aplicação permite que os usuários cadastrem-se, façam login utilizando suas credenciais ou através de autenticação social com Facebook e Google. Os usuários podem registrar ativos, visualizar dashboards e gerenciar informações relacionadas a equipamentos de tecnologia.
 
 ### Link para o projeto:
-https://drive.google.com/file/d/18UiI2jOT6_WnHTGk8spS1DhKN071h75g/view?usp=drive_link
+https://drive.google.com/file/d/18UiI2jOT6_WnHTGk8spS1DhKN071h75g/view?usp=drive_link -> inserido no domingo por não ter conseguido fazer o push do arquivo Startup.Auth.
+Não consegui inserir o projeto no repositorio remoto no domingo por conta dos dados de autenticação, apenas na segunda 04/11.
 
 ## Entidades
 A aplicação possui as seguintes entidades, cada uma com seus respectivos relacionamentos:
@@ -78,7 +79,19 @@ Outras telas exigem que o usuário esteja logado.
 4. Execute as Migrations Para criar o banco de dados e as tabelas, execute:
    ```bash
    dotnet ef database update
-5. Inicie a aplicação
+5. Insira os dados de autenticação(facebook e google) no arquivo Startup.Auth:
+   ```bash
+           app.UseFacebookAuthentication(
+           appId: "1340030724025576",
+           appSecret: "657fefa69af336377e8608012573bd57");
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "262285794861-a4lbj64rougfr155437i576t2d6v5764.apps.googleusercontent.com",
+                ClientSecret = "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",
+                CallbackPath = new PathString("/signin-google")
+            });
+6. Inicie a aplicação
 
 ## Acesso à Aplicação
 ### Acesse a aplicação em seu navegador através do seguinte URL:
